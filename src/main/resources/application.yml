@@ -1,0 +1,59 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 7200
+
+spring:
+  application:
+    name: rural-smart-backend
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rural_smart_home?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+
+mqtt:
+  broker: tcp://bemfa.com:9501
+  client-id: rural-smart-server
+  private-key: 9736f262f3f64a9ea343b2d0e9c2ea89
+  username:
+  password:
+  qos: 1
+  timeout: 30
+  keepalive: 60
+  topics:
+    device-data: ruralsmart001
+    device-status: ruralsmart002
+    device-control: ruralsmart003
+
+# 自定义配置
+rural:
+  automation:
+    # 温度超过28度自动开空调
+    temperature-threshold: 28
+    # 土壤湿度低于30%自动灌溉
+    soil-moisture-threshold: 30
+    # 灌溉时长（秒）
+    irrigation-duration: 600
